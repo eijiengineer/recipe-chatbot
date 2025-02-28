@@ -4,9 +4,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>レシピチャットボット</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+
     <h1>レシピチャットボットへようこそ！</h1>
-    <p>ここにあなたのチャットボットの内容が表示されます。</p>
+
+    <!-- ナビゲーションバー -->
+    <nav>
+        <a href="#">ホーム</a>
+        <a href="#">レシピ検索</a>
+        <a href="#">献立提案</a>
+        <a href="#">作り置きメニュー</a>
+    </nav>
+
+    <main>
+        <p>ここにあなたのチャットボットの内容が表示されます。</p>
+        <button onclick="showMessage()">クリックしてみる！</button>
+        <p id="message"></p>
+    </main>
+
+    <script>
+        function showMessage() {
+            document.getElementById("message").innerText = "ボタンが押されました！";
+        }
+    </script>
+
 </body>
 </html>
