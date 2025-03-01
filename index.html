@@ -23,19 +23,18 @@
         <button onclick="showMessage()">クリックしてみる！</button>
         <p id="message"></p>
 
+        <!-- 食材入力フォーム -->
+        <h2>レシピ検索</h2>
         <label for="ingredientInput">食材を入力:</label>
-<input type="text" id="ingredientInput" placeholder="例: 鶏肉">
-<button type="button" onclick="addIngredient()">追加</button>
+        <input type="text" id="ingredientInput" placeholder="例: 鶏肉">
+        <button type="button" onclick="addIngredient()">追加</button>
 
-<h3>追加された食材:</h3>
-<ul id="ingredientList"></ul>
+        <h3>追加された食材:</h3>
+        <ul id="ingredientList"></ul>
     </main>
 
-    <script>
-        function showMessage() {
-            document.getElementById("message").innerText = "ボタンが押されました！";
-        }
-    </script>
+    <!-- JavaScriptを読み込む -->
+    <script src="script.js"></script>
 
 </body>
 </html>
