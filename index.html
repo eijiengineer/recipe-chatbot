@@ -22,6 +22,13 @@
         <p>ここにあなたのチャットボットの内容が表示されます。</p>
         <button onclick="showMessage()">クリックしてみる！</button>
         <p id="message"></p>
+
+        <label for="ingredientInput">食材を入力:</label>
+<input type="text" id="ingredientInput" placeholder="例: 鶏肉">
+<button type="button" onclick="addIngredient()">追加</button>
+
+<h3>追加された食材:</h3>
+<ul id="ingredientList"></ul>
     </main>
 
     <script>
