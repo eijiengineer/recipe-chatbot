@@ -33,6 +33,19 @@
             <option value="イタリアン">イタリアン</option>
             <option value="フレンチ">フレンチ</option>
         </select>
+
+        <!-- 調理法の選択フォーム -->
+        <h3>調理法を選択（複数可）:</h3>
+        <label><input type="checkbox" name="method" value="炒める"> 炒める</label>
+        <label><input type="checkbox" name="method" value="煮る"> 煮る</label>
+        <label><input type="checkbox" name="method" value="蒸す"> 蒸す</label>
+        <label><input type="checkbox" name="method" value="焼く"> 焼く</label>
+        <label><input type="checkbox" name="method" value="揚げる"> 揚げる</label>
+        <label><input type="checkbox" name="method" value="茹でる"> 茹でる</label>
+        <label><input type="checkbox" name="method" value="生"> 生（火を使わない）</label>
+
+        <!-- レシピ作成ボタン -->
+        <button type="submit" id="generateRecipe">レシピを作成</button>
     </main>
 
     <!-- JavaScriptを読み込む -->
