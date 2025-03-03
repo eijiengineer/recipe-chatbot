@@ -34,7 +34,7 @@
             <option value="フレンチ">フレンチ</option>
         </select>
 
-        <!-- 調理法の選択フォーム -->
+        <!-- 調理法の選択 -->
         <h3>調理法を選択（複数可）:</h3>
         <label><input type="checkbox" name="method" value="炒める"> 炒める</label>
         <label><input type="checkbox" name="method" value="煮る"> 煮る</label>
@@ -43,6 +43,24 @@
         <label><input type="checkbox" name="method" value="揚げる"> 揚げる</label>
         <label><input type="checkbox" name="method" value="茹でる"> 茹でる</label>
         <label><input type="checkbox" name="method" value="生"> 生（火を使わない）</label>
+
+        <!-- 調理時間 -->
+        <h3>調理時間（分）:</h3>
+        <input type="number" id="cookTime" min="1" max="120" placeholder="例: 30">
+
+        <!-- アレルギー・食事制限 -->
+        <h3>アレルギー・食事制限（複数可）:</h3>
+        <label><input type="checkbox" name="diet" value="グルテンフリー"> グルテンフリー</label>
+        <label><input type="checkbox" name="diet" value="ヴィーガン"> ヴィーガン</label>
+        <label><input type="checkbox" name="diet" value="低糖質"> 低糖質</label>
+
+        <!-- ヘルシー志向 -->
+        <h3>ヘルシー志向:</h3>
+        <label><input type="checkbox" id="healthyOption"> ヘルシーレシピにする</label>
+
+        <!-- カロリー制限 -->
+        <h3>カロリー制限（kcal以下）:</h3>
+        <input type="number" id="calorieLimit" min="50" max="2000" placeholder="例: 500">
 
         <!-- レシピ作成ボタン -->
         <button type="submit" id="generateRecipe">レシピを作成</button>
