@@ -3,34 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>レシピチャットボット</title>
+    <title>レシピ作成</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-    <h1>レシピチャットボットへようこそ！</h1>
-
-    <!-- ナビゲーションバー -->
-    <nav>
-        <a href="#">ホーム</a>
-        <a href="#">レシピ検索</a>
-        <a href="#">献立提案</a>
-        <a href="#">作り置きメニュー</a>
-    </nav>
+    <h1>レシピ作成</h1>
 
     <main>
-        <p>ここにあなたのチャットボットの内容が表示されます。</p>
-        <button onclick="showMessage()">クリックしてみる！</button>
-        <p id="message"></p>
-
         <!-- 食材入力フォーム -->
-        <h2>レシピ検索</h2>
+        <h2>食材を入力:</h2>
         <label for="ingredientInput">食材を入力:</label>
         <input type="text" id="ingredientInput" placeholder="例: 鶏肉">
         <button type="button" onclick="addIngredient()">追加</button>
 
         <h3>追加された食材:</h3>
         <ul id="ingredientList"></ul>
+
+        <!-- 料理のジャンル 選択フォーム -->
+        <h3>料理のジャンルを選択:</h3>
+        <label for="cuisine">料理のジャンル:</label>
+        <select id="cuisine">
+            <option value="">選択してください</option>
+            <option value="和食">和食</option>
+            <option value="洋食">洋食</option>
+            <option value="中華">中華</option>
+            <option value="韓国料理">韓国料理</option>
+            <option value="エスニック">エスニック</option>
+            <option value="イタリアン">イタリアン</option>
+            <option value="フレンチ">フレンチ</option>
+        </select>
     </main>
 
     <!-- JavaScriptを読み込む -->
