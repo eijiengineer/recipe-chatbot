@@ -8,67 +8,86 @@
 </head>
 <body>
 
-    <h1>レシピ作成</h1>
+    <div class="container">
+        <h1>レシピ作成</h1>
 
-    <main>
-        <!-- 食材入力フォーム -->
-        <h2>食材を入力:</h2>
-        <label for="ingredientInput">食材を入力:</label>
-        <input type="text" id="ingredientInput" placeholder="例: 鶏肉">
-        <button type="button" onclick="addIngredient()">追加</button>
+        <!-- 食材入力 -->
+        <section class="input-section">
+            <h2>食材を入力:</h2>
+            <div class="input-group">
+                <input type="text" id="ingredientInput" placeholder="例: 鶏肉">
+                <button type="button" onclick="addIngredient()">追加</button>
+            </div>
+            <h3>追加された食材:</h3>
+            <ul id="ingredientList"></ul>
+        </section>
 
-        <h3>追加された食材:</h3>
-        <ul id="ingredientList"></ul>
+        <!-- 料理のジャンル -->
+        <section class="input-section">
+            <h3>料理のジャンルを選択:</h3>
+            <select id="cuisine">
+                <option value="">選択してください</option>
+                <option value="和食">和食</option>
+                <option value="洋食">洋食</option>
+                <option value="中華">中華</option>
+                <option value="韓国料理">韓国料理</option>
+                <option value="エスニック">エスニック</option>
+                <option value="イタリアン">イタリアン</option>
+                <option value="フレンチ">フレンチ</option>
+            </select>
+        </section>
 
-        <!-- 料理のジャンル 選択フォーム -->
-        <h3>料理のジャンルを選択:</h3>
-        <label for="cuisine">料理のジャンル:</label>
-        <select id="cuisine">
-            <option value="">選択してください</option>
-            <option value="和食">和食</option>
-            <option value="洋食">洋食</option>
-            <option value="中華">中華</option>
-            <option value="韓国料理">韓国料理</option>
-            <option value="エスニック">エスニック</option>
-            <option value="イタリアン">イタリアン</option>
-            <option value="フレンチ">フレンチ</option>
-        </select>
-
-        <!-- 調理法の選択 -->
-        <h3>調理法を選択（複数可）:</h3>
-        <label><input type="checkbox" name="method" value="炒める"> 炒める</label>
-        <label><input type="checkbox" name="method" value="煮る"> 煮る</label>
-        <label><input type="checkbox" name="method" value="蒸す"> 蒸す</label>
-        <label><input type="checkbox" name="method" value="焼く"> 焼く</label>
-        <label><input type="checkbox" name="method" value="揚げる"> 揚げる</label>
-        <label><input type="checkbox" name="method" value="茹でる"> 茹でる</label>
-        <label><input type="checkbox" name="method" value="生"> 生（火を使わない）</label>
+        <!-- 調理法 -->
+        <section class="input-section">
+            <h3>調理法を選択（複数可）:</h3>
+            <div class="checkbox-group">
+                <label><input type="checkbox" name="method" value="炒める"> 炒める</label>
+                <label><input type="checkbox" name="method" value="煮る"> 煮る</label>
+                <label><input type="checkbox" name="method" value="蒸す"> 蒸す</label>
+                <label><input type="checkbox" name="method" value="焼く"> 焼く</label>
+                <label><input type="checkbox" name="method" value="揚げる"> 揚げる</label>
+                <label><input type="checkbox" name="method" value="茹でる"> 茹でる</label>
+                <label><input type="checkbox" name="method" value="生"> 生（火を使わない）</label>
+            </div>
+        </section>
 
         <!-- 調理時間 -->
-        <h3>調理時間（分）:</h3>
-        <input type="number" id="cookTime" min="1" max="120" placeholder="例: 30">
+        <section class="input-section">
+            <h3>調理時間（分）:</h3>
+            <input type="number" id="cookTime" min="1" max="120" placeholder="例: 30">
+        </section>
 
         <!-- アレルギー・食事制限 -->
-        <h3>アレルギー・食事制限（複数可）:</h3>
-        <label><input type="checkbox" name="diet" value="グルテンフリー"> グルテンフリー</label>
-        <label><input type="checkbox" name="diet" value="ヴィーガン"> ヴィーガン</label>
-        <label><input type="checkbox" name="diet" value="低糖質"> 低糖質</label>
+        <section class="input-section">
+            <h3>アレルギー・食事制限（複数可）:</h3>
+            <div class="checkbox-group">
+                <label><input type="checkbox" name="diet" value="グルテンフリー"> グルテンフリー</label>
+                <label><input type="checkbox" name="diet" value="ヴィーガン"> ヴィーガン</label>
+                <label><input type="checkbox" name="diet" value="低糖質"> 低糖質</label>
+            </div>
+        </section>
 
         <!-- ヘルシー志向 -->
-        <h3>ヘルシー志向:</h3>
-        <label><input type="checkbox" id="healthyOption"> ヘルシーレシピにする</label>
+        <section class="input-section">
+            <h3>ヘルシー志向:</h3>
+            <label><input type="checkbox" id="healthyOption"> ヘルシーレシピにする</label>
+        </section>
 
         <!-- カロリー制限 -->
-        <h3>カロリー制限（kcal以下）:</h3>
-        <input type="number" id="calorieLimit" min="50" max="2000" placeholder="例: 500">
+        <section class="input-section">
+            <h3>カロリー制限（kcal以下）:</h3>
+            <input type="number" id="calorieLimit" min="50" max="2000" placeholder="例: 500">
+        </section>
 
         <!-- 自由記述欄 -->
-        <h3>追加のリクエスト:</h3>
-        <textarea id="customRequest" rows="3" placeholder="その他の要望や特記事項を入力してください"></textarea>
+        <section class="input-section">
+            <h3>追加のリクエスト:</h3>
+            <textarea id="customRequest" rows="3" placeholder="その他の要望や特記事項を入力してください"></textarea>
+        </section>
 
         <!-- レシピ作成ボタン -->
         <button type="submit" id="generateRecipe">レシピを作成</button>
-    </main>
+    </div>
 
     <!-- JavaScriptを読み込む -->
     <script src="script.js"></script>
