@@ -2,33 +2,31 @@ document.addEventListener("DOMContentLoaded", function () {
     // 食材をリストに追加
     function addIngredient() {
         let input = document.getElementById("ingredientInput");
-        let ingredient = input.value.trim(); // 空白を除去
+        let ingredient = input.value.trim();
 
-        if (ingredient === "") return; // 何も入力されていない場合は処理しない
+        if (ingredient === "") return;
 
         let list = document.getElementById("ingredientList");
 
-        // リストアイテムを作成
         let listItem = document.createElement("li");
         listItem.textContent = ingredient + " ";
 
-        // 削除ボタンを作成
         let deleteBtn = document.createElement("button");
         deleteBtn.textContent = "🗑️";
-        deleteBtn.style.marginLeft = "10px"; // 削除ボタンに余白をつける
+        deleteBtn.style.marginLeft = "10px";
         deleteBtn.onclick = function () {
             list.removeChild(listItem);
         };
 
-        listItem.appendChild(deleteBtn); // リストアイテムに削除ボタンを追加
-        list.appendChild(listItem); // リストに追加
+        listItem.appendChild(deleteBtn);
+        list.appendChild(listItem);
 
-        input.value = ""; // 入力欄をリセット
+        input.value = "";
     }
 
     document.querySelector("button[onclick='addIngredient()']").addEventListener("click", addIngredient);
 
-    // レシピ作成ボタンが押されたときの処理
+    // レシピ作成ボタンの処理
     document.getElementById("generateRecipe").addEventListener("click", function () {
         let selectedIngredients = [];
         document.querySelectorAll("#ingredientList li").forEach((item) => {
@@ -42,8 +40,23 @@ document.addEventListener("DOMContentLoaded", function () {
             selectedMethods.push(checkbox.value);
         });
 
+        let cookTime = document.getElementById("cookTime").value;
+
+        let selectedDiets = [];
+        document.querySelectorAll('input[name="diet"]:checked').forEach((checkbox) => {
+            selectedDiets.push(checkbox.value);
+        });
+
+        let isHealthy = document.getElementById("healthyOption").checked;
+
+        let calorieLimit = document.getElementById("calorieLimit").value;
+
         console.log("選択された食材:", selectedIngredients);
         console.log("選択された料理ジャンル:", selectedCuisine);
         console.log("選択された調理法:", selectedMethods);
+        console.log("調理時間:", cookTime, "分");
+        console.log("食事制限:", selectedDiets);
+        console.log("ヘルシー志向:", isHealthy ? "はい" : "いいえ");
+        console.log("カロリー制限:", calorieLimit, "kcal 以下");
     });
 });
