@@ -26,6 +26,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
     document.querySelector("button[onclick='addIngredient()']").addEventListener("click", addIngredient);
 
+    // Enterキーでも食材を追加
+    document.getElementById("ingredientInput").addEventListener("keypress", function (event) {
+        if (event.key === "Enter") {
+            event.preventDefault();
+            addIngredient();
+        }
+    });
+
     // レシピ作成ボタンの処理
     document.getElementById("generateRecipe").addEventListener("click", function () {
         let selectedIngredients = [];
@@ -51,6 +59,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
         let calorieLimit = document.getElementById("calorieLimit").value;
 
+        let customRequest = document.getElementById("customRequest").value.trim();
+
         console.log("選択された食材:", selectedIngredients);
         console.log("選択された料理ジャンル:", selectedCuisine);
         console.log("選択された調理法:", selectedMethods);
@@ -58,5 +68,6 @@ document.addEventListener("DOMContentLoaded", function () {
         console.log("食事制限:", selectedDiets);
         console.log("ヘルシー志向:", isHealthy ? "はい" : "いいえ");
         console.log("カロリー制限:", calorieLimit, "kcal 以下");
+        console.log("追加リクエスト:", customRequest);
     });
 });
