@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const ingredientInput = document.getElementById("ingredientInput");
     const ingredientList = document.getElementById("ingredientList");
 
-    document.getElementById("ingredientInput").addEventListener("keypress", function (event) {
+    ingredientInput.addEventListener("keypress", function (event) {
         if (event.key === "Enter") {
             addIngredient();
         }
@@ -34,13 +34,17 @@ function generateRecipe() {
     });
 
     // 料理のジャンル（チェックボックス）
-    const selectedGenres = getCheckedValues("料理のジャンル");
+    const selectedGenres = getCheckedValues("料理ジャンル");
     // 調理法
     const selectedMethods = getCheckedValues("調理法");
-    // 調理時間
-    const cookTime = document.getElementById("cookTime").value || null;
-    // カロリー制限
-    const calorieLimit = document.getElementById("calorieLimit").value || null;
+
+    // 🛠 エラー回避のため、nullチェックを追加
+    const cookTimeInput = document.getElementById("cookTime");
+    const cookTime = cookTimeInput ? cookTimeInput.value : null;
+
+    const calorieLimitInput = document.getElementById("calorieLimit");
+    const calorieLimit = calorieLimitInput ? calorieLimitInput.value : null;
+
     // 料理の種類
     const selectedTypes = getCheckedValues("料理の種類");
     // 使用する調理器具
@@ -50,7 +54,7 @@ function generateRecipe() {
     // 料理の用途
     const selectedUses = getCheckedValues("料理の用途");
     // 追加リクエスト
-    const customRequest = document.getElementById("customRequest").value.trim();
+    const customRequest = document.getElementById("customRequest") ? document.getElementById("customRequest").value.trim() : "";
 
     // JSON データを作成
     const requestData = {
@@ -71,9 +75,9 @@ function generateRecipe() {
 }
 
 // 🟢 チェックボックスの値を取得する関数
-function getCheckedValues(sectionTitle) {
+function getCheckedValues(sectionClass) {
     const values = [];
-    document.querySelectorAll(`.option-section h3:contains("${sectionTitle}") + .checkbox-group input[type="checkbox"]:checked`)
+    document.querySelectorAll(`.${sectionClass} input[type="checkbox"]:checked`)
         .forEach(input => values.push(input.value));
     return values;
 }
