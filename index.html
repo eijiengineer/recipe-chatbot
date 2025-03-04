@@ -3,128 +3,66 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>レシピ作成</title>
+    <title>レシピチャットボット</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
     <div class="container">
-        <h1>レシピ作成</h1>
+        <h1>レシピチャットボット</h1>
 
-        <!-- 必須項目 -->
-        <section class="required-section">
+        <!-- 🟡 食材入力 -->
+        <div class="section">
             <h2>食材（必須）</h2>
-            <div class="input-group">
-                <input type="text" id="ingredientInput" placeholder="例: 鶏肉">
-                <button type="button" onclick="addIngredient()">追加</button>
-            </div>
-            <h3>追加された食材:</h3>
+            <input type="text" id="ingredientInput" placeholder="例: 鶏肉">
+            <button id="addIngredientBtn">追加</button>
             <ul id="ingredientList"></ul>
-        </section>
+        </div>
 
-        <!-- オプション（カテゴリー別に整理） -->
-        <h2>オプション（任意）</h2>
+        <!-- 🔵 オプション入力 -->
+        <div class="section">
+            <h2>オプション（任意）</h2>
 
-        <!-- 料理のジャンル -->
-        <section class="option-section">
+            <!-- 🍳 料理のジャンル -->
             <h3>料理のジャンル</h3>
             <div class="checkbox-group">
-                <label><input type="checkbox" value="和食"> 和食</label>
-                <label><input type="checkbox" value="洋食"> 洋食</label>
-                <label><input type="checkbox" value="中華"> 中華</label>
-                <label><input type="checkbox" value="韓国料理"> 韓国料理</label>
-                <label><input type="checkbox" value="エスニック"> エスニック</label>
-                <label><input type="checkbox" value="イタリアン"> イタリアン</label>
-                <label><input type="checkbox" value="フレンチ"> フレンチ</label>
+                <label><input type="checkbox" class="genre-checkbox" value="和食"> 和食</label>
+                <label><input type="checkbox" class="genre-checkbox" value="洋食"> 洋食</label>
+                <label><input type="checkbox" class="genre-checkbox" value="中華"> 中華</label>
+                <label><input type="checkbox" class="genre-checkbox" value="韓国料理"> 韓国料理</label>
+                <label><input type="checkbox" class="genre-checkbox" value="エスニック"> エスニック</label>
+                <label><input type="checkbox" class="genre-checkbox" value="イタリアン"> イタリアン</label>
+                <label><input type="checkbox" class="genre-checkbox" value="フレンチ"> フレンチ</label>
             </div>
-        </section>
 
-        <!-- 調理法 -->
-        <section class="option-section">
+            <!-- 🔥 調理法 -->
             <h3>調理法</h3>
             <div class="checkbox-group">
-                <label><input type="checkbox" value="炒める"> 炒める</label>
-                <label><input type="checkbox" value="煮る"> 煮る</label>
-                <label><input type="checkbox" value="蒸す"> 蒸す</label>
-                <label><input type="checkbox" value="焼く"> 焼く</label>
-                <label><input type="checkbox" value="揚げる"> 揚げる</label>
-                <label><input type="checkbox" value="茹でる"> 茹でる</label>
-                <label><input type="checkbox" value="生"> 生（火を使わない）</label>
+                <label><input type="checkbox" class="method-checkbox" value="炒める"> 炒める</label>
+                <label><input type="checkbox" class="method-checkbox" value="煮る"> 煮る</label>
+                <label><input type="checkbox" class="method-checkbox" value="蒸す"> 蒸す</label>
+                <label><input type="checkbox" class="method-checkbox" value="焼く"> 焼く</label>
+                <label><input type="checkbox" class="method-checkbox" value="揚げる"> 揚げる</label>
+                <label><input type="checkbox" class="method-checkbox" value="茹でる"> 茹でる</label>
+                <label><input type="checkbox" class="method-checkbox" value="生"> 生（火を使わない）</label>
             </div>
-        </section>
 
-        <!-- 調理時間 & カロリー -->
-        <section class="option-section">
+            <!-- ⏳ 調理時間 -->
             <h3>調理時間（分）</h3>
-            <input type="number" id="cookTime" min="1" max="120" placeholder="例: 30">
-        </section>
+            <input type="number" id="cookTime" placeholder="例: 30">
 
-        <section class="option-section">
-            <h3>カロリー制限（kcal以下）</h3>
-            <input type="number" id="calorieLimit" min="50" max="2000" placeholder="例: 500">
-        </section>
+            <!-- 🔻 追加リクエスト -->
+            <h3>追加リクエスト</h3>
+            <textarea id="customRequest" placeholder="例: スパイシーな味付けにしてほしい"></textarea>
+        </div>
 
-        <!-- 主菜・副菜・スープ・おつまみ・デザート -->
-        <section class="option-section">
-            <h3>料理の種類</h3>
-            <div class="checkbox-group">
-                <label><input type="checkbox" value="主菜"> 主菜</label>
-                <label><input type="checkbox" value="副菜"> 副菜</label>
-                <label><input type="checkbox" value="スープ"> スープ</label>
-                <label><input type="checkbox" value="おつまみ"> おつまみ</label>
-                <label><input type="checkbox" value="デザート"> デザート</label>
-            </div>
-        </section>
+        <!-- 🔴 レシピ作成ボタン -->
+        <button id="generateRecipe">レシピ作成</button>
 
-        <!-- 使う調理器具 -->
-        <section class="option-section">
-            <h3>使用する調理器具</h3>
-            <div class="checkbox-group">
-                <label><input type="checkbox" value="電子レンジ"> 電子レンジ</label>
-                <label><input type="checkbox" value="フライパン"> フライパン</label>
-                <label><input type="checkbox" value="オーブン"> オーブン</label>
-                <label><input type="checkbox" value="炊飯器"> 炊飯器</label>
-                <label><input type="checkbox" value="蒸し器"> 蒸し器</label>
-                <label><input type="checkbox" value="トースター"> トースター</label>
-                <label><input type="checkbox" value="ホットプレート"> ホットプレート</label>
-                <label><input type="checkbox" value="圧力鍋"> 圧力鍋</label>
-                <label><input type="checkbox" value="エアフライヤー"> エアフライヤー</label>
-            </div>
-        </section>
-
-        <!-- 味の好み -->
-        <section class="option-section">
-            <h3>味の好み</h3>
-            <div class="checkbox-group">
-                <label><input type="checkbox" value="濃い味"> 濃い味</label>
-                <label><input type="checkbox" value="あっさり"> あっさり</label>
-                <label><input type="checkbox" value="スパイシー"> スパイシー</label>
-            </div>
-        </section>
-
-        <!-- 料理の用途 -->
-        <section class="option-section">
-            <h3>料理の用途</h3>
-            <div class="checkbox-group">
-                <label><input type="checkbox" value="朝食"> 朝食</label>
-                <label><input type="checkbox" value="昼食"> 昼食</label>
-                <label><input type="checkbox" value="夕食"> 夕食</label>
-                <label><input type="checkbox" value="お弁当"> お弁当</label>
-                <label><input type="checkbox" value="パーティー"> パーティー</label>
-            </div>
-        </section>
-
-        <!-- 自由記述欄 -->
-        <section class="option-section">
-            <h3>追加のリクエスト</h3>
-            <textarea id="customRequest" rows="3" placeholder="その他の要望や特記事項を入力してください"></textarea>
-        </section>
-
-        <!-- レシピ作成ボタン -->
-        <button type="submit" id="generateRecipe">レシピを作成</button>
+        <!-- 📝 JSONデータ表示（デバッグ用） -->
+        <pre id="output"></pre>
     </div>
 
-    <!-- JavaScriptを読み込む -->
     <script src="script.js"></script>
 
 </body>
