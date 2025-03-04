@@ -1,13 +1,13 @@
 document.addEventListener("DOMContentLoaded", function () {
-    // ✅ 選択オプションを動的に生成
+    // ✅ チェックボックス用データを定義
     const options = {
         genre: ["和食", "洋食", "中華", "韓国料理", "エスニック", "イタリアン", "フレンチ"],
         method: ["炒める", "煮る", "蒸す", "焼く", "揚げる", "茹でる", "生（火を使わない）"],
-        use: ["主菜", "副菜", "スープ", "おつまみ", "デザート"],
         tool: ["フライパン", "電子レンジ", "オーブン", "炊飯器", "蒸し器", "圧力鍋", "ホットプレート"],
         taste: ["甘い", "辛い", "酸っぱい", "さっぱり", "こってり", "スパイシー"]
     };
 
+    // ✅ チェックボックスを動的に生成
     for (const category in options) {
         const container = document.getElementById(`${category}-options`);
         options[category].forEach(option => {
@@ -17,9 +17,21 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    // 🟢 食材の追加
+    // ✅ 食材の追加
     document.getElementById("addIngredientBtn").addEventListener("click", addIngredient);
+    document.getElementById("ingredientInput").addEventListener("keypress", function(event) {
+        if (event.key === "Enter") addIngredient();
+    });
+
+    // ✅ レシピ作成ボタン
     document.getElementById("generateRecipe").addEventListener("click", generateRecipe);
+
+    // ✅ オプションの折りたたみ機能
+    document.getElementById("toggleOptions").addEventListener("click", function () {
+        const container = document.getElementById("optionsContainer");
+        container.classList.toggle("hidden");
+        this.textContent = container.classList.contains("hidden") ? "＋ オプションを表示" : "− オプションを隠す";
+    });
 });
 
 // 🟢 食材を追加する
@@ -50,8 +62,6 @@ function generateRecipe() {
         "料理ジャンル": getCheckedValues("genre-checkbox"),
         "調理法": getCheckedValues("method-checkbox"),
         "調理時間": document.getElementById("cookTime").value,
-        "ヘルシー志向": getCheckedValues("healthy-checkbox"),
-        "料理の用途": getCheckedValues("use-checkbox"),
         "使用する調理器具": getCheckedValues("tool-checkbox"),
         "味の好み": getCheckedValues("taste-checkbox"),
         "カロリー制限": document.getElementById("calorieLimit").value,
