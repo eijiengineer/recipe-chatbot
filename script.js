@@ -13,10 +13,11 @@ document.addEventListener("DOMContentLoaded", function () {
         generateRecipe();
     });
 
-    // ✅ ボタン風チェックボックスの動作を修正（クリックで選択/解除）
+    // ✅ チェックボックスのクリックイベントを適用
     document.querySelectorAll(".checkbox-btn").forEach(button => {
         button.addEventListener("click", function () {
             this.classList.toggle("selected");
+            this.setAttribute("aria-pressed", this.classList.contains("selected"));
         });
     });
 });
