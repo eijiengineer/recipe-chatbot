@@ -45,22 +45,18 @@ function generateRecipe() {
         ingredients.push(item.childNodes[0].nodeValue.trim());
     });
 
-    // 料理のジャンル（チェックボックス）
+    // 🟢 チェックボックスが動作するように、クラス名を修正
     const selectedGenres = getCheckedValues("genre-checkbox");
-    // 調理法
     const selectedMethods = getCheckedValues("method-checkbox");
-    // 調理時間
-    const cookTime = document.getElementById("cookTime") ? document.getElementById("cookTime").value : null;
-    // カロリー制限
-    const calorieLimit = document.getElementById("calorieLimit") ? document.getElementById("calorieLimit").value : null;
-    // 料理の種類
     const selectedTypes = getCheckedValues("type-checkbox");
-    // 使用する調理器具
     const selectedTools = getCheckedValues("tool-checkbox");
-    // 味の好み
     const selectedTastes = getCheckedValues("taste-checkbox");
-    // 料理の用途
     const selectedUses = getCheckedValues("use-checkbox");
+
+    // 調理時間とカロリー制限
+    const cookTime = document.getElementById("cookTime") ? document.getElementById("cookTime").value : null;
+    const calorieLimit = document.getElementById("calorieLimit") ? document.getElementById("calorieLimit").value : null;
+
     // 追加リクエスト
     const customRequest = document.getElementById("customRequest") ? document.getElementById("customRequest").value.trim() : "";
 
@@ -82,10 +78,11 @@ function generateRecipe() {
     console.log("生成された JSON データ:", JSON.stringify(requestData, null, 2));
 }
 
-// 🟢 チェックボックスの値を取得する関数（選択できるよう修正）
+// 🟢 **チェックボックスの値を取得する関数（修正済み）**
 function getCheckedValues(className) {
     const values = [];
-    document.querySelectorAll(`.${className} input[type="checkbox"]:checked`)
-        .forEach(input => values.push(input.value));
+    document.querySelectorAll(`.${className}:checked`).forEach(input => {
+        values.push(input.value);
+    });
     return values;
 }
