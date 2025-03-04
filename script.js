@@ -1,25 +1,28 @@
 document.addEventListener("DOMContentLoaded", function () {
-    // 🟢 食材の追加機能（Enterキー or ボタン）
-    const ingredientInput = document.getElementById("ingredientInput");
-    const ingredientList = document.getElementById("ingredientList");
-    const addIngredientBtn = document.getElementById("addIngredientBtn");
-    const generateRecipeBtn = document.getElementById("generateRecipe");
+    // ✅ 選択オプションを動的に生成
+    const options = {
+        genre: ["和食", "洋食", "中華", "韓国料理", "エスニック", "イタリアン", "フレンチ"],
+        method: ["炒める", "煮る", "蒸す", "焼く", "揚げる", "茹でる", "生（火を使わない）"],
+        use: ["主菜", "副菜", "スープ", "おつまみ", "デザート"],
+        tool: ["フライパン", "電子レンジ", "オーブン", "炊飯器", "蒸し器", "圧力鍋", "ホットプレート"],
+        taste: ["甘い", "辛い", "酸っぱい", "さっぱり", "こってり", "スパイシー"]
+    };
 
-    // 🟢 エンターキーでも食材を追加
-    ingredientInput.addEventListener("keypress", function (event) {
-        if (event.key === "Enter") {
-            addIngredient();
-        }
-    });
+    for (const category in options) {
+        const container = document.getElementById(`${category}-options`);
+        options[category].forEach(option => {
+            const label = document.createElement("label");
+            label.innerHTML = `<input type="checkbox" class="${category}-checkbox" value="${option}"> ${option}`;
+            container.appendChild(label);
+        });
+    }
 
-    // 🟢 追加ボタンでも食材を追加
-    addIngredientBtn.addEventListener("click", addIngredient);
-
-    // 🟢 レシピ作成ボタン
-    generateRecipeBtn.addEventListener("click", generateRecipe);
+    // 🟢 食材の追加
+    document.getElementById("addIngredientBtn").addEventListener("click", addIngredient);
+    document.getElementById("generateRecipe").addEventListener("click", generateRecipe);
 });
 
-// 🟢 食材を追加する処理（削除ボタン付き）
+// 🟢 食材を追加する
 function addIngredient() {
     const input = document.getElementById("ingredientInput");
     const list = document.getElementById("ingredientList");
@@ -27,52 +30,38 @@ function addIngredient() {
     if (input.value.trim() !== "") {
         const listItem = document.createElement("li");
         listItem.textContent = input.value;
-
-        // 🔘 削除ボタンを追加
         const removeButton = document.createElement("button");
         removeButton.textContent = "×";
-        removeButton.classList.add("remove-btn");
         removeButton.onclick = function () {
             list.removeChild(listItem);
         };
-
         listItem.appendChild(removeButton);
         list.appendChild(listItem);
         input.value = "";
     }
 }
 
-// 🟢 ユーザーの入力データを JSON に変換
+// 🟢 JSONを作成して表示
 function generateRecipe() {
-    const ingredients = [];
-    document.querySelectorAll("#ingredientList li").forEach(item => {
-        ingredients.push(item.childNodes[0].nodeValue.trim());
-    });
+    const ingredients = Array.from(document.querySelectorAll("#ingredientList li")).map(item => item.textContent.replace("×", "").trim());
 
-    // ✅ チェックボックスの値を取得
-    const selectedGenres = getCheckedValues("genre-checkbox");
-    const selectedMethods = getCheckedValues("method-checkbox");
-
-    // 調理時間
-    const cookTime = document.getElementById("cookTime").value;
-
-    // 追加リクエスト
-    const customRequest = document.getElementById("customRequest").value.trim();
-
-    // JSON データを作成
     const requestData = {
         "食材": ingredients,
-        "料理ジャンル": selectedGenres,
-        "調理法": selectedMethods,
-        "調理時間": cookTime,
-        "追加リクエスト": customRequest
+        "料理ジャンル": getCheckedValues("genre-checkbox"),
+        "調理法": getCheckedValues("method-checkbox"),
+        "調理時間": document.getElementById("cookTime").value,
+        "ヘルシー志向": getCheckedValues("healthy-checkbox"),
+        "料理の用途": getCheckedValues("use-checkbox"),
+        "使用する調理器具": getCheckedValues("tool-checkbox"),
+        "味の好み": getCheckedValues("taste-checkbox"),
+        "カロリー制限": document.getElementById("calorieLimit").value,
+        "追加リクエスト": document.getElementById("customRequest").value.trim()
     };
 
-    // 🔥 JSON データを表示
     document.getElementById("output").textContent = JSON.stringify(requestData, null, 2);
 }
 
-// ✅ チェックボックスの値を取得
+// ✅ 選択されたチェックボックスの値を取得
 function getCheckedValues(className) {
     return Array.from(document.querySelectorAll(`.${className}:checked`)).map(input => input.value);
 }
