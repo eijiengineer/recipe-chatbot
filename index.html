@@ -25,31 +25,37 @@
 
             <!-- 🍳 料理のジャンル -->
             <h3>料理のジャンル</h3>
-            <div class="checkbox-group">
-                <label><input type="checkbox" class="genre-checkbox" value="和食"> 和食</label>
-                <label><input type="checkbox" class="genre-checkbox" value="洋食"> 洋食</label>
-                <label><input type="checkbox" class="genre-checkbox" value="中華"> 中華</label>
-                <label><input type="checkbox" class="genre-checkbox" value="韓国料理"> 韓国料理</label>
-                <label><input type="checkbox" class="genre-checkbox" value="エスニック"> エスニック</label>
-                <label><input type="checkbox" class="genre-checkbox" value="イタリアン"> イタリアン</label>
-                <label><input type="checkbox" class="genre-checkbox" value="フレンチ"> フレンチ</label>
-            </div>
+            <div class="checkbox-group" id="genre-options"></div>
 
             <!-- 🔥 調理法 -->
-            <h3>調理法</h3>
-            <div class="checkbox-group">
-                <label><input type="checkbox" class="method-checkbox" value="炒める"> 炒める</label>
-                <label><input type="checkbox" class="method-checkbox" value="煮る"> 煮る</label>
-                <label><input type="checkbox" class="method-checkbox" value="蒸す"> 蒸す</label>
-                <label><input type="checkbox" class="method-checkbox" value="焼く"> 焼く</label>
-                <label><input type="checkbox" class="method-checkbox" value="揚げる"> 揚げる</label>
-                <label><input type="checkbox" class="method-checkbox" value="茹でる"> 茹でる</label>
-                <label><input type="checkbox" class="method-checkbox" value="生"> 生（火を使わない）</label>
-            </div>
+            <h3>調理法（複数可）</h3>
+            <div class="checkbox-group" id="method-options"></div>
 
             <!-- ⏳ 調理時間 -->
             <h3>調理時間（分）</h3>
             <input type="number" id="cookTime" placeholder="例: 30">
+
+            <!-- ⚡ ヘルシー志向 -->
+            <h3>ヘルシー志向</h3>
+            <div class="checkbox-group">
+                <label><input type="checkbox" class="healthy-checkbox" value="ヘルシーレシピ"> ヘルシーレシピにする</label>
+            </div>
+
+            <!-- 🔻 料理の用途 -->
+            <h3>料理の用途</h3>
+            <div class="checkbox-group" id="use-options"></div>
+
+            <!-- 🍴 使用する調理器具 -->
+            <h3>使用する調理器具</h3>
+            <div class="checkbox-group" id="tool-options"></div>
+
+            <!-- 🌶️ 味の好み -->
+            <h3>味の好み</h3>
+            <div class="checkbox-group" id="taste-options"></div>
+
+            <!-- 🍽️ カロリー制限 -->
+            <h3>カロリー制限（kcal以下）</h3>
+            <input type="number" id="calorieLimit" placeholder="例: 500">
 
             <!-- 🔻 追加リクエスト -->
             <h3>追加リクエスト</h3>
