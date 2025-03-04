@@ -12,6 +12,13 @@ document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("generateRecipe").addEventListener("click", function () {
         generateRecipe();
     });
+
+    // ✅ ボタン風チェックボックスの動作を修正（クリックで選択/解除）
+    document.querySelectorAll(".checkbox-btn").forEach(button => {
+        button.addEventListener("click", function () {
+            this.classList.toggle("selected");
+        });
+    });
 });
 
 // 🟢 食材を追加する処理（削除ボタン付き）
@@ -45,13 +52,13 @@ function generateRecipe() {
         ingredients.push(item.childNodes[0].nodeValue.trim());
     });
 
-    // 🟢 チェックボックスが動作するように、クラス名を修正
-    const selectedGenres = getCheckedValues("genre-checkbox");
-    const selectedMethods = getCheckedValues("method-checkbox");
-    const selectedTypes = getCheckedValues("type-checkbox");
-    const selectedTools = getCheckedValues("tool-checkbox");
-    const selectedTastes = getCheckedValues("taste-checkbox");
-    const selectedUses = getCheckedValues("use-checkbox");
+    // ✅ ボタン風チェックボックスが選択されているか確認
+    const selectedGenres = getSelectedCheckboxValues("genre-checkbox");
+    const selectedMethods = getSelectedCheckboxValues("method-checkbox");
+    const selectedTypes = getSelectedCheckboxValues("type-checkbox");
+    const selectedTools = getSelectedCheckboxValues("tool-checkbox");
+    const selectedTastes = getSelectedCheckboxValues("taste-checkbox");
+    const selectedUses = getSelectedCheckboxValues("use-checkbox");
 
     // 調理時間とカロリー制限
     const cookTime = document.getElementById("cookTime") ? document.getElementById("cookTime").value : null;
@@ -78,11 +85,11 @@ function generateRecipe() {
     console.log("生成された JSON データ:", JSON.stringify(requestData, null, 2));
 }
 
-// 🟢 **チェックボックスの値を取得する関数（修正済み）**
-function getCheckedValues(className) {
+// 🟢 ✅ ボタン風のチェックボックスから選択値を取得
+function getSelectedCheckboxValues(className) {
     const values = [];
-    document.querySelectorAll(`.${className}:checked`).forEach(input => {
-        values.push(input.value);
+    document.querySelectorAll(`.${className}.selected`).forEach(button => {
+        values.push(button.textContent.trim());
     });
     return values;
 }
