@@ -1,52 +1,117 @@
+/* 全体のレイアウト */
 body {
     font-family: Arial, sans-serif;
-    background-color: #f9f9f9;
-    text-align: center;
+    background-color: #f8f9fa;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
 }
 
 .container {
-    width: 80%;
-    max-width: 600px;
-    margin: 20px auto;
-    background: white;
+    background-color: white;
     padding: 20px;
     border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    width: 90%;
+    max-width: 600px;
 }
 
+/* 見出しデザイン */
 h1 {
-    color: #ff8c00;
+    text-align: center;
+    color: #333;
 }
 
-.input-section {
-    background: #fff;
+/* 必須入力エリア */
+.required-section {
+    background-color: #fff3cd;
     padding: 15px;
-    margin: 10px 0;
     border-radius: 8px;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
 }
 
+.required-section h2 {
+    color: #856404;
+}
+
+/* オプションエリア */
+.option-section {
+    background-color: #f8f9fa;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+/* 入力グループ（食材入力） */
 .input-group {
     display: flex;
     gap: 10px;
+    margin-bottom: 10px;
 }
 
-input, select, textarea {
+input[type="text"],
+input[type="number"],
+textarea {
     width: 100%;
     padding: 8px;
     border: 1px solid #ccc;
     border-radius: 5px;
+    font-size: 16px;
 }
 
 button {
-    background-color: #ff8c00;
+    background-color: #28a745;
     color: white;
     border: none;
-    padding: 10px 15px;
+    padding: 8px 15px;
     border-radius: 5px;
     cursor: pointer;
+    font-size: 16px;
 }
 
 button:hover {
-    background-color: #e07b00;
+    background-color: #218838;
+}
+
+/* チェックボックスを横並びに */
+.checkbox-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.checkbox-group label {
+    background-color: white;
+    padding: 8px 12px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.checkbox-group input[type="checkbox"] {
+    display: none;
+}
+
+.checkbox-group input[type="checkbox"]:checked + label {
+    background-color: #28a745;
+    color: white;
+    border-color: #28a745;
+}
+
+/* レシピ作成ボタン */
+#generateRecipe {
+    width: 100%;
+    background-color: #007bff;
+    padding: 12px;
+    font-size: 18px;
+    border-radius: 8px;
+    margin-top: 15px;
+}
+
+#generateRecipe:hover {
+    background-color: #0056b3;
 }
