@@ -78,21 +78,11 @@ function renderIngredients(listElem) {
 
 // フォームからデータ収集
 function gatherRequestData() {
-  const genreElems = document.querySelectorAll(
-    ".option-block:nth-of-type(1) input[type='checkbox']:checked"
-  );
-  const methodElems = document.querySelectorAll(
-    ".option-block:nth-of-type(2) input[type='checkbox']:checked"
-  );
-  const toolsElems = document.querySelectorAll(
-    ".option-block:nth-of-type(4) input[type='checkbox']:checked"
-  );
-  const tasteElems = document.querySelectorAll(
-    ".option-block:nth-of-type(5) input[type='checkbox']:checked"
-  );
-  const usageElems = document.querySelectorAll(
-    ".option-block:nth-of-type(6) input[type='checkbox']:checked"
-  );
+  const genreElems = document.querySelectorAll(".option-block:nth-of-type(1) input[type='checkbox']:checked");
+  const methodElems = document.querySelectorAll(".option-block:nth-of-type(2) input[type='checkbox']:checked");
+  const toolsElems = document.querySelectorAll(".option-block:nth-of-type(4) input[type='checkbox']:checked");
+  const tasteElems = document.querySelectorAll(".option-block:nth-of-type(5) input[type='checkbox']:checked");
+  const usageElems = document.querySelectorAll(".option-block:nth-of-type(6) input[type='checkbox']:checked");
 
   const cookingTimeInput = document.getElementById("cookingTimeInput");
   const calorieLimitInput = document.getElementById("calorieLimitInput");
@@ -134,5 +124,30 @@ async function generateRecipe(requestData) {
 // 画面にレシピ表示
 function displayRecipe(recipeText) {
   const recipeResult = document.getElementById("recipeResult");
-  recipeResult.textContent = recipeText;
+
+  try {
+    const recipeJson = JSON.parse(recipeText);
+
+    const html = `
+      <h3>${recipeJson["レシピタイトル"]}</h3>
+      <h4>■ 材料</h4>
+      <ul>
+        ${recipeJson["材料"]
+          .map(item => `<li>${item["食材"]}：${item["量"]}</li>`)
+          .join("")}
+      </ul>
+      <h4>■ 作り方</h4>
+      <ol>
+        ${recipeJson["作り方"]
+          .map(step => `<li>${step}</li>`)
+          .join("")}
+      </ol>
+      <p><strong>所要時間：</strong> ${recipeJson["調理時間"]}</p>
+      <p><strong>カロリー：</strong> ${recipeJson["カロリー"]}</p>
+    `;
+
+    recipeResult.innerHTML = html;
+  } catch (e) {
+    recipeResult.textContent = recipeText;
+  }
 }
