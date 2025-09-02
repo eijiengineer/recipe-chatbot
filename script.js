@@ -37,14 +37,14 @@ window.addEventListener("DOMContentLoaded", () => {
     console.log("■ 送信データ:", requestData);
 
     // API呼び出し
-    generateRecipe(requestData)
-      .then((recipe) => {
-        displayRecipe(recipe);
-      })
-      .catch((error) => {
-        console.error(error);
-        alert("レシピ生成に失敗しました。");
-      });
+      generateRecipe(requestData)
+        .then((recipe) => {
+          displayRecipe(recipe);
+        })
+        .catch((error) => {
+          console.error(error);
+          alert("レシピ生成に失敗しました。");
+        });
   });
 });
 
@@ -122,13 +122,24 @@ async function generateRecipe(requestData) {
 }
 
 // 画面にレシピ表示
-function displayRecipe(recipeText) {
+function displayRecipe(recipeData) {
   const recipeResult = document.getElementById("recipeResult");
 
-  try {
-    const recipeJson = JSON.parse(recipeText);
+  let recipeJson;
 
-    const html = `
+  if (typeof recipeData === "string") {
+    try {
+      recipeJson = JSON.parse(recipeData);
+    } catch (e) {
+      // 文字列がJSONでない場合はそのまま表示して終了
+      recipeResult.textContent = recipeData;
+      return;
+    }
+  } else {
+    recipeJson = recipeData;
+  }
+
+  const html = `
       <article class="recipe-card">
         <h3 class="recipe-title">${recipeJson["レシピタイトル"]}</h3>
         <section>
@@ -154,8 +165,5 @@ function displayRecipe(recipeText) {
       </article>
     `;
 
-    recipeResult.innerHTML = html;
-  } catch (e) {
-    recipeResult.textContent = recipeText;
-  }
+  recipeResult.innerHTML = html;
 }
