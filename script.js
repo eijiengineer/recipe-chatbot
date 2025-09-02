@@ -129,21 +129,29 @@ function displayRecipe(recipeText) {
     const recipeJson = JSON.parse(recipeText);
 
     const html = `
-      <h3>${recipeJson["レシピタイトル"]}</h3>
-      <h4>■ 材料</h4>
-      <ul>
-        ${recipeJson["材料"]
-          .map(item => `<li>${item["食材"]}：${item["量"]}</li>`)
-          .join("")}
-      </ul>
-      <h4>■ 作り方</h4>
-      <ol>
-        ${recipeJson["作り方"]
-          .map(step => `<li>${step}</li>`)
-          .join("")}
-      </ol>
-      <p><strong>所要時間：</strong> ${recipeJson["調理時間"]}</p>
-      <p><strong>カロリー：</strong> ${recipeJson["カロリー"]}</p>
+      <article class="recipe-card">
+        <h3 class="recipe-title">${recipeJson["レシピタイトル"]}</h3>
+        <section>
+          <h4 class="section-title">材料</h4>
+          <ul class="ingredients">
+            ${recipeJson["材料"]
+              .map(item => `<li>${item["食材"]}：${item["量"]}</li>`)
+              .join("")}
+          </ul>
+        </section>
+        <section>
+          <h4 class="section-title">作り方</h4>
+          <ol class="steps">
+            ${recipeJson["作り方"]
+              .map(step => `<li>${step}</li>`)
+              .join("")}
+          </ol>
+        </section>
+        <section class="info">
+          <p><strong>所要時間：</strong> ${recipeJson["調理時間"]}</p>
+          <p><strong>カロリー：</strong> ${recipeJson["カロリー"]}</p>
+        </section>
+      </article>
     `;
 
     recipeResult.innerHTML = html;

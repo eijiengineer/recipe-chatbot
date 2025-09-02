@@ -3,11 +3,11 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  font-family: sans-serif;
+  font-family: 'Noto Sans JP', sans-serif;
 }
 
 body {
-  background-color: #f8f8f8;
+  background: linear-gradient(135deg, #ffeedd 0%, #fff7f0 100%);
   color: #333;
   margin: 0;
   padding: 0;
@@ -15,7 +15,8 @@ body {
 
 /* ヘッダー */
 header {
-  background-color: #ffebcd;
+  background: #ffb347;
+  color: #fff;
   padding: 1rem;
   text-align: center;
 }
@@ -38,6 +39,7 @@ h1, h2, h3 {
   margin: 1rem 0;
   padding: 1rem;
   border-radius: 6px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
 /* 見出し下の余白 */
@@ -60,6 +62,10 @@ h1, h2, h3 {
 #addIngredientBtn {
   padding: 0.5rem 1rem;
   cursor: pointer;
+  background-color: #ffb347;
+  border: none;
+  color: #fff;
+  border-radius: 4px;
 }
 
 #ingredientList {
@@ -95,6 +101,10 @@ h1, h2, h3 {
   margin-bottom: 0.5rem;
   cursor: pointer;
   padding: 0.5rem 1rem;
+  background-color: #ffb347;
+  border: none;
+  color: #fff;
+  border-radius: 4px;
 }
 
 /* 折りたたみ */
@@ -131,6 +141,10 @@ h1, h2, h3 {
   padding: 0.8rem 1.5rem;
   cursor: pointer;
   font-size: 1rem;
+  background-color: #ff7f50;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
 }
 
 /* レシピ表示 */
@@ -139,52 +153,50 @@ h1, h2, h3 {
 }
 
 #recipeResult {
-  white-space: pre-wrap;
-  background-color: #f9f9f9;
-  border: 1px solid #ccc;
+  white-space: normal;
+}
+
+.recipe-card {
+  background-color: #fff;
+  border: 1px solid #eee;
+  border-radius: 8px;
   padding: 1.5rem;
   margin-top: 1.5rem;
-  border-radius: 8px;
-  max-width: 700px;
-  line-height: 1.6;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
 }
 
-#recipeResult h3 {
-  margin-bottom: 0.75rem;
-  font-size: 1.2rem;
+.recipe-title {
+  font-size: 1.4rem;
+  margin-bottom: 1rem;
+  text-align: center;
 }
 
-#recipeResult ul {
+.section-title {
+  font-weight: bold;
+  border-left: 4px solid #ffb347;
+  padding-left: 0.5rem;
+  margin: 1.2rem 0 0.6rem;
+}
+
+.ingredients,
+.steps {
   margin: 0 0 1rem 1.5rem;
   padding-left: 1rem;
 }
 
-#recipeResult li {
-  margin-bottom: 0.3rem;
+.info {
+  margin-top: 1rem;
 }
 
-#recipeResult p {
-  margin-bottom: 0.6rem;
-}
-
-#recipeResult strong {
-  font-weight: bold;
-}
-
-#recipeResult .section-title {
-  margin-top: 1.2rem;
-  margin-bottom: 0.6rem;
-  font-weight: bold;
-  border-left: 4px solid #ffb347;
-  padding-left: 0.5rem;
-  font-size: 1rem;
+.info p {
+  margin-bottom: 0.4rem;
 }
 
 /* フッター */
 footer {
   text-align: center;
   padding: 1rem;
-  background-color: #ffebcd;
+  background-color: #ffb347;
+  color: #fff;
   margin-top: 2rem;
 }
