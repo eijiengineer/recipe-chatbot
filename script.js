@@ -32,21 +32,21 @@ window.addEventListener("DOMContentLoaded", () => {
   });
 
   // レシピ作成ボタン
-  createRecipeBtn.addEventListener("click", () => {
-    const requestData = gatherRequestData();
-    console.log("■ 送信データ:", requestData);
+    createRecipeBtn.addEventListener("click", () => {
+      const requestData = gatherRequestData();
+      console.log("■ 送信データ:", requestData);
 
-    // API呼び出し
+      // API呼び出し
       generateRecipe(requestData)
         .then((recipe) => {
           displayRecipe(recipe);
         })
         .catch((error) => {
           console.error(error);
-          alert("レシピ生成に失敗しました。");
+          alert(`レシピ生成に失敗しました: ${error.message}`);
         });
+    });
   });
-});
 
 // 食材追加
 function addIngredient(inputElem, listElem) {
@@ -118,6 +118,9 @@ async function generateRecipe(requestData) {
   }
 
   const data = await response.json();
+  if (!data.recipe) {
+    throw new Error("API response missing recipe");
+  }
   return data.recipe;
 }
 
@@ -137,6 +140,15 @@ function displayRecipe(recipeData) {
     }
   } else {
     recipeJson = recipeData;
+  }
+
+  if (
+    !recipeJson ||
+    !Array.isArray(recipeJson["材料"]) ||
+    !Array.isArray(recipeJson["作り方"])
+  ) {
+    recipeResult.textContent = "取得したレシピの形式が不正です。";
+    return;
   }
 
   const html = `
